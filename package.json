@@ -1,8 +1,9 @@
 {
   "name": "slotflow-api-gateway",
   "version": "1.0.0",
-  "description": "",
+  "description": "slotflow api gateway service",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "predev": "npx kill-port 3000",
     "dev": "tsx watch src/server.ts",
@@ -11,7 +12,7 @@
     "bundle": "tsup src/server.ts --format esm --dts --out-dir dist-bundle"
   },
   "keywords": [],
-  "author": "",
+  "author": "midhun_kalarikkal",
   "license": "ISC",
   "dependencies": {
     "cookie-parser": "^1.4.7",
