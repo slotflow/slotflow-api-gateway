@@ -26,6 +26,10 @@ router.use("/google", proxy(appConfig.services.mainBackend, {
   "^/": "/google/",
 }));
 
+router.use("/s3", proxy(appConfig.services.mainBackend, {
+  "^/": "/s3/",
+}));
+
 router.use(
   "/provider",
   authMiddleware,

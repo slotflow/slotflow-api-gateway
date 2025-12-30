@@ -36,6 +36,8 @@ export const proxy = (target: string, pathRewrite?: Record<string, string>) => {
           );
         }
 
+        console.log("gatewayReq.user : ",gatewayReq.user);
+
         if (gatewayReq.user) {
           proxyReq.setHeader("x-user-id", gatewayReq.user.id ?? 1);
           proxyReq.setHeader("x-user-role", gatewayReq.user.role);
