@@ -1,13 +1,14 @@
 import { Router } from "express";
 import { proxy } from "../../proxy/proxy";
-import { appConfig } from "../../config/env";
+import { serviceConfig } from "../../config/env";
 import { authMiddleware } from "../../middleware/auth.middleware";
+import { blockCheckMiddleware } from "../../middleware/blockCheck.middleware";
 
 const router = Router();
 
 router.use(
   "/auth",
-  proxy(appConfig.services.mainBackend, {
+  proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/auth/",
   })
 );
@@ -17,23 +18,31 @@ router.use(authMiddleware);
 router.use(
   "/user",
   authMiddleware,
-  proxy(appConfig.services.mainBackend, {
+  blockCheckMiddleware,
+  proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/user/"
   })
 );
 
-router.use("/google", proxy(appConfig.services.mainBackend, {
-  "^/": "/google/",
-}));
+router.use("/google",
+  authMiddleware,
+  blockCheckMiddleware,
+  proxy(serviceConfig.mainBackendServiceUrl, {
+    "^/": "/google/",
+  }));
 
-router.use("/s3", proxy(appConfig.services.mainBackend, {
-  "^/": "/s3/",
-}));
+router.use("/s3",
+  authMiddleware,
+  blockCheckMiddleware,
+  proxy(serviceConfig.mainBackendServiceUrl, {
+    "^/": "/s3/",
+  }));
 
 router.use(
   "/provider",
   authMiddleware,
-  proxy(appConfig.services.mainBackend, {
+  blockCheckMiddleware,
+  proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/provider/"
   })
 );
@@ -41,7 +50,7 @@ router.use(
 router.use(
   "/admin",
   authMiddleware,
-  proxy(appConfig.services.mainBackend, {
+  proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/admin/"
   })
 );
@@ -49,15 +58,26 @@ router.use(
 router.use(
   "/notifications",
   authMiddleware,
-  proxy(appConfig.services.notification, {
+  blockCheckMiddleware,
+  proxy(serviceConfig.notificationServiceUrl, {
     "^/": "/notifications/"
+  })
+);
+
+router.use(
+  "/payment",
+  authMiddleware,
+  blockCheckMiddleware,
+  proxy(serviceConfig.paymentServiceUrl, {
+    "^/": "/payment/"
   })
 );
 
 router.use(
   "/real-time",
   authMiddleware,
-  proxy(appConfig.services.realtime, {
+  blockCheckMiddleware,
+  proxy(serviceConfig.realtimeServiceUrl, {
     "^/": "/real-time/"
   })
 );

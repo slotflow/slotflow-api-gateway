@@ -1,7 +1,8 @@
 import type { Socket } from "net";
+import { Request } from "express";
+import { log } from "../shared/logger/logger";
 import type { IncomingMessage, ServerResponse } from "http";
 import { createProxyMiddleware } from "http-proxy-middleware";
-import { GatewayRequest } from "../middleware/auth.middleware";
 
 export const proxy = (target: string, pathRewrite?: Record<string, string>) => {
 
@@ -19,28 +20,29 @@ export const proxy = (target: string, pathRewrite?: Record<string, string>) => {
 
     on: {
       proxyReq: (proxyReq, req) => {
-        const gatewayReq = req as GatewayRequest;
+        const expressReq = req as Request;
 
-        // 🔍 LOGGING
         const originalUrl = req.url;
         const proxiedPath = proxyReq.path;
 
         try {
           const targetUrl = new URL(target);
-          console.log(
+          log.info(
             `[GATEWAY PROXY] ${req.method} ${originalUrl} → ${targetUrl.origin}${proxiedPath}`
           );
         } catch {
-          console.log(
+          log.info(
             `[GATEWAY PROXY] ${req.method} ${originalUrl} → ${target}${proxiedPath}`
           );
         }
 
-        console.log("gatewayReq.user : ",gatewayReq.user);
+        log.info(`expressReq.user : ${JSON.stringify(expressReq.user)}`);
 
-        if (gatewayReq.user) {
-          proxyReq.setHeader("x-user-id", gatewayReq.user.id ?? 1);
-          proxyReq.setHeader("x-user-role", gatewayReq.user.role);
+        if (expressReq.user) {
+          if(expressReq.user.id) {
+            proxyReq.setHeader("x-user-id", expressReq.user.id);
+          }
+          proxyReq.setHeader("x-user-role", expressReq.user.role);
         }
 
       },
@@ -63,11 +65,9 @@ export const proxy = (target: string, pathRewrite?: Record<string, string>) => {
           serverRes.end(
             JSON.stringify({ message: "Service unavailable" })
           );
-        }
+        };
       }
     }
   }
   );
-}
-
-// comment
+};

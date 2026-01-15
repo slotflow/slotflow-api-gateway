@@ -1,21 +1,16 @@
-import { appConfig } from "../config/env";
+import { jwtConfig } from "../config/env";
+import { Role } from "../shared/utils/types";
+import { log } from "../shared/logger/logger";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 
-export interface GatewayRequest extends Request {
-  user?: {
-    id: string;
-    role: string;
-  };
-};
-
 interface AccessTokenPayload extends JwtPayload {
   userOrProviderId: string;
-  role: string;
+  role: Role;
 };
 
 export const authMiddleware = (
-  req: GatewayRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
@@ -26,17 +21,15 @@ export const authMiddleware = (
   };
 
   try {
-    const decoded = jwt.verify(token, appConfig.jwtSecret as jwt.Secret);
+    const decoded = jwt.verify(token, jwtConfig.jwtSecret);
 
     if (typeof decoded === "string") {
-      console.log("one");
       return res.status(401).json({ message: "Invalid token" });
     };
 
     const payload = decoded as AccessTokenPayload;
 
     if (payload.exp && payload.exp * 1000 < Date.now()) {
-      console.log("two");
       return res.status(401).json({ message: "Token expired" });
     };
 
@@ -47,8 +40,7 @@ export const authMiddleware = (
 
     next();
   } catch (error) {
-    console.log("three");
-    console.log("error : ",error);
+    log.error("Error in authMiddleware", error as Error);
     return res.status(401).json({ message: "Invalid token" });
   };
 };

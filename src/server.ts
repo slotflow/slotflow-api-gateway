@@ -1,7 +1,7 @@
 import app from "./app";
+import { appConfig } from "./config/env";
+import { log } from "./shared/logger/logger";
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`[SLOTFLOW API GATEWAY] running on http://localhost:${PORT}`);
+app.listen(appConfig.port, () => {
+  log.info(`[SLOTFLOW API GATEWAY] running on http://localhost:${appConfig.port}`);
 });

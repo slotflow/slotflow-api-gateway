@@ -2,11 +2,12 @@ import cors from "cors";
 import express from "express";
 import routes from "./routes";
 import cookieParser from "cookie-parser";
+import { serviceConfig } from "./config/env";
 
 const app = express();
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
+  origin: serviceConfig.frontendUrl,
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Requested-With'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
