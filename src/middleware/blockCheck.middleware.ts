@@ -18,7 +18,7 @@ export const blockCheckMiddleware = async (req: Request, res: Response, next: Ne
             if (cachedStatus === "true") {
                 return res
                     .status(403)
-                    .json({ success: false, message: "Your account is blocked" });
+                    .json({ success: false, message: "Your account is blocked from api gateway" });
             }
             return next();
         }
