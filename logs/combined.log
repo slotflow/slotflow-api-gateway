@@ -1,0 +1,118 @@
+[2026-01-15 02:35:12] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 02:37:01] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 03:25:50] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 03:26:39] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 03:26:43] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 03:26:46] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 03:27:03] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signin → http://localhost:4000/auth/signin[39m
+[2026-01-15 03:27:03] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-15 03:30:02] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 03:31:30] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signin → http://localhost:4000/api/auth/signin[39m
+[2026-01-15 03:31:30] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-15 03:32:19] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /user/appservices?categories[]=Professional+Services → http://localhost:4000/api/user/appservices?categories[]=Professional+Services[39m
+[2026-01-15 03:32:19] [[32minfo[39m]: [32mexpressReq.user : [object Object][39m
+[2026-01-15 03:32:19] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /user/providers?maxPrice=0&minPrice=0&slotflowTrusted=false&skip=0&limit=12 → http://localhost:4000/api/user/providers?maxPrice=0&minPrice=0&slotflowTrusted=false&skip=0&limit=12[39m
+[2026-01-15 03:32:19] [[32minfo[39m]: [32mexpressReq.user : [object Object][39m
+[2026-01-15 03:32:40] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signout → http://localhost:4000/api/auth/signout[39m
+[2026-01-15 03:32:40] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-15 03:33:15] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 03:33:24] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 03:33:25] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 03:33:37] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 03:33:59] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signin → http://localhost:4000/api/auth/signin[39m
+[2026-01-15 03:33:59] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-15 03:43:00] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signin → http://localhost:4000/api/auth/signin[39m
+[2026-01-15 03:43:00] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-15 03:44:30] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 03:45:03] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signin → http://localhost:4000/api/auth/signin[39m
+[2026-01-15 03:45:03] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-15 03:45:15] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signout → http://localhost:4000/api/auth/signout[39m
+[2026-01-15 03:45:15] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-15 03:45:38] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signin → http://localhost:4000/api/auth/signin[39m
+[2026-01-15 03:45:38] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-15 03:45:41] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /admin/dashboard/today → http://localhost:4000/api/admin/dashboard/today[39m
+[2026-01-15 03:47:54] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 03:47:56] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /admin/dashboard/providers → http://localhost:4000/api/admin/dashboard/providers[39m
+[2026-01-15 03:49:05] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 03:49:10] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 03:49:14] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 03:49:19] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /admin/dashboard/providers → http://localhost:4000/api/admin/dashboard/providers[39m
+[2026-01-15 03:49:19] [[32minfo[39m]: [32mexpressReq.user : [object Object][39m
+[2026-01-15 03:49:50] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signin → http://localhost:4000/api/auth/signin[39m
+[2026-01-15 03:49:50] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-15 03:49:51] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /admin/dashboard/today → http://localhost:4000/api/admin/dashboard/today[39m
+[2026-01-15 03:49:51] [[32minfo[39m]: [32mexpressReq.user : [object Object][39m
+[2026-01-15 03:50:27] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 03:50:43] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signin → http://localhost:4000/api/auth/signin[39m
+[2026-01-15 03:50:43] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-15 03:50:45] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /admin/dashboard/today → http://localhost:4000/api/admin/dashboard/today[39m
+[2026-01-15 15:33:17] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 15:33:31] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /admin/providers?page=1&limit=10 → http://localhost:4000/api/admin/providers?page=1&limit=10[39m
+[2026-01-15 15:34:57] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 15:35:52] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signin → http://localhost:4000/api/auth/signin[39m
+[2026-01-15 15:35:52] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-15 15:46:43] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signin → http://localhost:4000/api/auth/signin[39m
+[2026-01-15 15:46:43] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-15 15:46:50] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /admin/dashboard/today → http://localhost:4000/api/admin/dashboard/today[39m
+[2026-01-15 15:48:25] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 15:48:29] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 15:48:37] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /admin/dashboard/users → http://localhost:4000/api/admin/dashboard/users[39m
+[2026-01-15 15:54:58] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 15:55:04] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /admin/dashboard/users → http://localhost:4000/api/admin/dashboard/users[39m
+[2026-01-15 15:58:15] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 15:58:22] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 15:58:26] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 15:58:30] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 15:58:37] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 15:58:45] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /admin/dashboard/today → http://localhost:4000/api/admin/dashboard/today[39m
+[2026-01-15 15:58:45] [[32minfo[39m]: [32mexpressReq.user : {"role":"ADMIN"}[39m
+[2026-01-15 16:00:25] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 16:00:29] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 16:06:38] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signin → http://localhost:4000/api/auth/signin[39m
+[2026-01-15 16:07:06] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 16:07:09] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signin → http://localhost:4000/api/auth/signin[39m
+[2026-01-15 16:07:09] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-15 16:07:14] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /admin/dashboard/today → http://localhost:4000/api/admin/dashboard/today[39m
+[2026-01-15 16:07:14] [[32minfo[39m]: [32mexpressReq.user : {"role":"ADMIN"}[39m
+[2026-01-15 16:12:17] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signin → http://localhost:4000/api/auth/signin[39m
+[2026-01-15 16:12:17] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-15 16:12:25] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signout → http://localhost:4000/api/auth/signout[39m
+[2026-01-15 16:12:25] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-15 16:12:51] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signin → http://localhost:4000/api/auth/signin[39m
+[2026-01-15 16:12:51] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-15 16:12:53] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /admin/dashboard/today → http://localhost:4000/api/admin/dashboard/today[39m
+[2026-01-15 16:12:53] [[32minfo[39m]: [32mexpressReq.user : {"role":"ADMIN"}[39m
+[2026-01-15 16:15:15] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signin → http://localhost:4000/api/auth/signin[39m
+[2026-01-15 16:15:15] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-15 16:15:17] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /admin/dashboard/today → http://localhost:4000/api/admin/dashboard/today[39m
+[2026-01-15 16:15:17] [[32minfo[39m]: [32mexpressReq.user : {"role":"ADMIN"}[39m
+[2026-01-15 16:15:21] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /admin/dashboard/users → http://localhost:4000/api/admin/dashboard/users[39m
+[2026-01-15 16:15:21] [[32minfo[39m]: [32mexpressReq.user : {"role":"ADMIN"}[39m
+[2026-01-15 16:15:23] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /admin/dashboard/providers → http://localhost:4000/api/admin/dashboard/providers[39m
+[2026-01-15 16:15:23] [[32minfo[39m]: [32mexpressReq.user : {"role":"ADMIN"}[39m
+[2026-01-15 16:15:24] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /admin/dashboard/subscriptions → http://localhost:4000/api/admin/dashboard/subscriptions[39m
+[2026-01-15 16:15:24] [[32minfo[39m]: [32mexpressReq.user : {"role":"ADMIN"}[39m
+[2026-01-15 16:15:26] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /admin/dashboard/revenue → http://localhost:4000/api/admin/dashboard/revenue[39m
+[2026-01-15 16:15:26] [[32minfo[39m]: [32mexpressReq.user : {"role":"ADMIN"}[39m
+[2026-01-15 16:15:38] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /admin/dashboard/appointments → http://localhost:4000/api/admin/dashboard/appointments[39m
+[2026-01-15 16:15:38] [[32minfo[39m]: [32mexpressReq.user : {"role":"ADMIN"}[39m
+[2026-01-15 16:17:24] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 16:17:38] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 16:17:44] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 16:22:07] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /admin/users?page=1&limit=10 → http://localhost:4000/api/admin/users?page=1&limit=10[39m
+[2026-01-15 16:22:07] [[32minfo[39m]: [32mexpressReq.user : {"role":"ADMIN"}[39m
+[2026-01-15 16:22:13] [[32minfo[39m]: [32m[GATEWAY PROXY] PATCH /admin/users/693db16dd13641dca389082d → http://localhost:4000/api/admin/users/693db16dd13641dca389082d[39m
+[2026-01-15 16:22:13] [[32minfo[39m]: [32mexpressReq.user : {"role":"ADMIN"}[39m
+[2026-01-15 16:22:16] [[32minfo[39m]: [32m[GATEWAY PROXY] GET /admin/users?page=1&limit=10 → http://localhost:4000/api/admin/users?page=1&limit=10[39m
+[2026-01-15 16:22:16] [[32minfo[39m]: [32mexpressReq.user : {"role":"ADMIN"}[39m
+[2026-01-15 16:22:21] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signout → http://localhost:4000/api/auth/signout[39m
+[2026-01-15 16:22:21] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-15 16:23:03] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signin → http://localhost:4000/api/auth/signin[39m
+[2026-01-15 16:23:03] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-15 16:24:16] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 16:24:29] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signin → http://localhost:4000/api/auth/signin[39m
+[2026-01-15 16:24:29] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-15 16:34:23] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 16:36:55] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 16:37:03] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-15 16:37:08] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
