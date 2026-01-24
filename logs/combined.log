@@ -116,3 +116,18 @@
 [2026-01-15 16:36:55] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
 [2026-01-15 16:37:03] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
 [2026-01-15 16:37:08] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-23 20:38:50] [[32minfo[39m]: [32m[SLOTFLOW API GATEWAY] running on http://localhost:3000[39m
+[2026-01-24 15:41:09] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signin → http://localhost:4000/api/auth/signin[39m
+[2026-01-24 15:41:09] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-24 15:43:04] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signup → http://localhost:4000/api/auth/signup[39m
+[2026-01-24 15:43:04] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-24 15:49:35] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signup → http://localhost:4000/api/auth/signup[39m
+[2026-01-24 15:49:35] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-24 16:00:39] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signup → http://localhost:4000/api/auth/signup[39m
+[2026-01-24 16:00:39] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-24 16:01:45] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/signup → http://localhost:4000/api/auth/signup[39m
+[2026-01-24 16:01:45] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-24 16:02:50] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/verify-otp → http://localhost:4000/api/auth/verify-otp[39m
+[2026-01-24 16:02:50] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
+[2026-01-24 16:16:00] [[32minfo[39m]: [32m[GATEWAY PROXY] POST /auth/verify-otp → http://localhost:4000/api/auth/verify-otp[39m
+[2026-01-24 16:16:00] [[32minfo[39m]: [32mexpressReq.user : undefined[39m
