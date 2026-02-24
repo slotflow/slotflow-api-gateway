@@ -1,19 +1,14 @@
 import { cacheService } from "../services";
 import { log } from "../shared/logger/logger";
-import { NextFunction, Request, Response } from "express";
-import { Role } from "../shared/utils/types";
-
-export const blockCheckMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+export const blockCheckMiddleware = async (req, res, next) => {
     try {
         const userId = req.user?.id;
-        const role = req.user?.role;
-
-        if (role !== Role.ADMIN && !userId) {
+        if (!userId) {
             return res.status(401).json({ success: false, message: "Unauthorized: No user information found" });
         }
-
-        const cachedStatus = await cacheService.getBlockList(userId as string);
-
+        console.log("userId : ", userId);
+        const cachedStatus = await cacheService.getBlockList(userId);
+        console.log("cachedStatus : ", cachedStatus);
         if (cachedStatus !== null) {
             if (cachedStatus === "true") {
                 return res
@@ -22,10 +17,10 @@ export const blockCheckMiddleware = async (req: Request, res: Response, next: Ne
             }
             return next();
         }
-
         next();
-    } catch (error) {
-        log.error("Error in blockCheckMiddleware", error as Error);
+    }
+    catch (error) {
+        log.error("Error in blockCheckMiddleware", error);
         res.status(500).json({ success: false, message: "Internal Server Error" });
     }
 };

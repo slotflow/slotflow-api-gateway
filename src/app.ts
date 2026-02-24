@@ -1,8 +1,11 @@
 import cors from "cors";
 import express from "express";
-import routes from "./routes";
+import routes from "./routes/apiRoutes";
 import cookieParser from "cookie-parser";
 import { serviceConfig } from "./config/env";
+import { socketProxy } from "./proxy/socketProxy";
+import { authMiddleware } from "./middleware/auth.middleware";
+import { blockCheckMiddleware } from "./middleware/blockCheck.middleware";
 
 const app = express();
 
@@ -15,7 +18,20 @@ app.use(cors({
 
 app.use(cookieParser());
 
+app.use((req, _res, next) => {
+  console.log("Incoming request:", req.method, req.url);
+  next();
+});
+
+
 app.use("/api", routes);
+
+app.use(
+  // "/socket.io",
+  authMiddleware,
+  blockCheckMiddleware,
+  socketProxy
+);
 
 app.get("/", (_, res) => {
   res.json({ status: "gateway online" });

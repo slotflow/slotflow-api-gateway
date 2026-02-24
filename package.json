@@ -1,8 +1,11 @@
 {
   "name": "slotflow-api-gateway",
-  "version": "1.0.0",
   "description": "slotflow api gateway service",
+  "author": "midhunkalarikkal",
+  "license": "MIT",
+  "version": "1.0.0",
   "main": "index.js",
+  "packageManager": "pnpm@10.28.1",
   "type": "module",
   "scripts": {
     "predev": "npx kill-port 3000",
@@ -12,8 +15,6 @@
     "bundle": "tsup src/server.ts --format esm --dts --out-dir dist-bundle"
   },
   "keywords": [],
-  "author": "midhun_kalarikkal",
-  "license": "ISC",
   "dependencies": {
     "@upstash/redis": "^1.36.1",
     "cookie-parser": "^1.4.7",

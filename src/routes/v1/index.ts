@@ -56,20 +56,45 @@ router.use(
 );
 
 router.use(
-  "/notifications",
+  "/subscriptions",
   authMiddleware,
-  blockCheckMiddleware,
-  proxy(serviceConfig.notificationServiceUrl, {
-    "^/": "/notifications/"
+  proxy(serviceConfig.mainBackendServiceUrl, {
+    "^/": "/subscriptions/"
   })
 );
 
 router.use(
-  "/payment",
+  "/bookings",
+  authMiddleware,
+  proxy(serviceConfig.mainBackendServiceUrl, {
+    "^/": "/bookings/"
+  })
+);
+
+router.use(
+  "/notification",
+  authMiddleware,
+  blockCheckMiddleware,
+  proxy(serviceConfig.notificationServiceUrl, {
+    "^/": "/notification/"
+  })
+);
+
+router.use(
+  "/user-device",
+  authMiddleware,
+  blockCheckMiddleware,
+  proxy(serviceConfig.notificationServiceUrl, {
+    "^/": "/user-device/"
+  })
+);
+
+router.use(
+  "/payments",
   authMiddleware,
   blockCheckMiddleware,
   proxy(serviceConfig.paymentServiceUrl, {
-    "^/": "/payment/"
+    "^/": "/payments/"
   })
 );
 

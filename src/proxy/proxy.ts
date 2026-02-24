@@ -15,7 +15,6 @@ export const proxy = (target: string, pathRewrite?: Record<string, string>) => {
     changeOrigin: true,
     secure: false,
     proxyTimeout: 5000,
-
     pathRewrite,
 
     on: {
@@ -26,6 +25,7 @@ export const proxy = (target: string, pathRewrite?: Record<string, string>) => {
         const proxiedPath = proxyReq.path;
 
         try {
+          console.log("Proxy");
           const targetUrl = new URL(target);
           log.info(
             `[GATEWAY PROXY] ${req.method} ${originalUrl} → ${targetUrl.origin}${proxiedPath}`
