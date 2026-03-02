@@ -27,7 +27,6 @@ app.use((req, _res, next) => {
 app.use("/api", routes);
 
 app.use(
-  // "/socket.io",
   authMiddleware,
   blockCheckMiddleware,
   socketProxy

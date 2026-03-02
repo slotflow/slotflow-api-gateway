@@ -3,6 +3,8 @@ import { proxy } from "../../proxy/proxy";
 import { serviceConfig } from "../../config/env";
 import { authMiddleware } from "../../middleware/auth.middleware";
 import { blockCheckMiddleware } from "../../middleware/blockCheck.middleware";
+import express from 'express';
+import { engagedSlots } from "../../middleware/engagedSlots";
 
 const router = Router();
 
@@ -70,6 +72,21 @@ router.use(
     "^/": "/bookings/"
   })
 );
+
+router.use(
+  "/reviews",
+  authMiddleware,
+  proxy(serviceConfig.mainBackendServiceUrl, {
+    "^/": "/reviews/"
+  })
+);
+
+router.get(
+  '/service-availability/engaged-slots/:providerId/:date',
+  authMiddleware,
+  blockCheckMiddleware,
+  engagedSlots
+)
 
 router.use(
   "/notification",
