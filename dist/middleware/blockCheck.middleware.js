@@ -6,9 +6,7 @@ export const blockCheckMiddleware = async (req, res, next) => {
         if (!userId) {
             return res.status(401).json({ success: false, message: "Unauthorized: No user information found" });
         }
-        console.log("userId : ", userId);
         const cachedStatus = await cacheService.getBlockList(userId);
-        console.log("cachedStatus : ", cachedStatus);
         if (cachedStatus !== null) {
             if (cachedStatus === "true") {
                 return res

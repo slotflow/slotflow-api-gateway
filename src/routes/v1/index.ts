@@ -1,67 +1,34 @@
 import { Router } from "express";
 import { proxy } from "../../proxy/proxy";
 import { serviceConfig } from "../../config/env";
+import { engagedSlots } from "../../middleware/engagedSlots";
 import { authMiddleware } from "../../middleware/auth.middleware";
 import { blockCheckMiddleware } from "../../middleware/blockCheck.middleware";
-import express from 'express';
-import { engagedSlots } from "../../middleware/engagedSlots";
 
 const router = Router();
 
 router.use(
   "/auth",
   proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/auth/",
+    "^/": "/api/v1/auth/",
   })
 );
 
 router.use(authMiddleware);
 
 router.use(
-  "/user",
+  "/addresses",
   authMiddleware,
-  blockCheckMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/user/"
-  })
-);
-
-router.use("/google",
-  authMiddleware,
-  blockCheckMiddleware,
-  proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/google/",
-  }));
-
-router.use("/s3",
-  authMiddleware,
-  blockCheckMiddleware,
-  proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/s3/",
-  }));
-
-router.use(
-  "/provider",
-  authMiddleware,
-  blockCheckMiddleware,
-  proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/provider/"
+    "^/": "/api/v1/addresses/"
   })
 );
 
 router.use(
-  "/admin",
+  "/admin-dashboard",
   authMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/admin/"
-  })
-);
-
-router.use(
-  "/subscriptions",
-  authMiddleware,
-  proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/subscriptions/"
+    "^/": "/api/v1/admin-dashboard/"
   })
 );
 
@@ -69,40 +36,32 @@ router.use(
   "/bookings",
   authMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/bookings/"
+    "^/": "/api/v1/bookings/"
   })
 );
 
-router.use(
-  "/reviews",
+router.use("/google",
   authMiddleware,
+  blockCheckMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/reviews/"
-  })
-);
-
-router.get(
-  '/service-availability/engaged-slots/:providerId/:date',
-  authMiddleware,
-  blockCheckMiddleware,
-  engagedSlots
-)
+    "^/": "/api/v1/google/",
+  }));
 
 router.use(
-  "/notification",
+  "/messages",
   authMiddleware,
   blockCheckMiddleware,
-  proxy(serviceConfig.notificationServiceUrl, {
-    "^/": "/notification/"
+  proxy(serviceConfig.realtimeServiceUrl, {
+    "^/": "/api/messages/"
   })
 );
 
 router.use(
-  "/user-device",
+  "/notifications",
   authMiddleware,
   blockCheckMiddleware,
   proxy(serviceConfig.notificationServiceUrl, {
-    "^/": "/user-device/"
+    "^/": "/api/notifications/"
   })
 );
 
@@ -111,16 +70,106 @@ router.use(
   authMiddleware,
   blockCheckMiddleware,
   proxy(serviceConfig.paymentServiceUrl, {
-    "^/": "/payments/"
+    "^/": "/api/payments/"
   })
 );
 
 router.use(
-  "/real-time",
+  "/plans",
+  authMiddleware,
+  proxy(serviceConfig.mainBackendServiceUrl, {
+    "^/": "/api/v1/plans/"
+  })
+);
+
+router.use(
+  "/providers",
   authMiddleware,
   blockCheckMiddleware,
-  proxy(serviceConfig.realtimeServiceUrl, {
-    "^/": "/real-time/"
+  proxy(serviceConfig.mainBackendServiceUrl, {
+    "^/": "/api/v1/providers/"
+  })
+);
+
+router.use(
+  "/provider-services",
+  authMiddleware,
+  blockCheckMiddleware,
+  proxy(serviceConfig.mainBackendServiceUrl, {
+    "^/": "/api/v1/provider-services/"
+  })
+);
+
+router.use(
+  "/reviews",
+  authMiddleware,
+  proxy(serviceConfig.mainBackendServiceUrl, {
+    "^/": "/api/v1/reviews/"
+  })
+);
+
+router.use("/s3",
+  authMiddleware,
+  blockCheckMiddleware,
+  proxy(serviceConfig.mainBackendServiceUrl, {
+    "^/": "/api/v1/s3/",
+  }));
+
+router.use("/services",
+  authMiddleware,
+  blockCheckMiddleware,
+  proxy(serviceConfig.mainBackendServiceUrl, {
+    "^/": "/api/v1/services/",
+  }));
+
+
+  router.get(
+  '/service-availabilities/engaged-slots/:providerId/:date',
+  authMiddleware,
+  blockCheckMiddleware,
+  engagedSlots
+)
+
+router.use(
+  "/service-availabilities",
+  authMiddleware,
+  proxy(serviceConfig.mainBackendServiceUrl, {
+    "^/": "/api/v1/service-availabilities/"
+  })
+);
+
+router.use(
+  "/subscriptions",
+  authMiddleware,
+  proxy(serviceConfig.mainBackendServiceUrl, {
+    "^/": "/api/v1/subscriptions/"
+  })
+);
+
+router.use(
+  "/users",
+  authMiddleware,
+  blockCheckMiddleware,
+  proxy(serviceConfig.mainBackendServiceUrl, {
+    "^/": "/api/v1/users/"
+  })
+);
+
+router.use(
+  "/provider-dashboard",
+  authMiddleware,
+  blockCheckMiddleware,
+  proxy(serviceConfig.mainBackendServiceUrl, {
+    "^/": "/api/v1/provider-dashboard/"
+  })
+);
+
+router.use(
+  "/user-devices",
+  authMiddleware,
+  blockCheckMiddleware,
+  proxy(serviceConfig.notificationServiceUrl, {
+    "^/": "/api/user-devices/"
   })
 );
 

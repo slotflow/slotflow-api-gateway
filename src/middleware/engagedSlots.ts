@@ -4,8 +4,6 @@ import { Request, Response, NextFunction } from "express";
 
 export const engagedSlots = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        console.log("engagedSlots middleware hit");
-        console.log("req.body : ",req.body);
         
         const { providerId, date } = req.params;
 
@@ -18,7 +16,6 @@ export const engagedSlots = async (req: Request, res: Response, next: NextFuncti
             return parts[parts.length - 1];
         });
 
-        console.log("engagedSlotIds : ",engagedSlotIds);
 
         res.status(200).json({
             status: "success",
