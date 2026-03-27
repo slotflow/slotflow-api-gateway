@@ -61,7 +61,7 @@ router.use(
   authMiddleware,
   blockCheckMiddleware,
   proxy(serviceConfig.notificationServiceUrl, {
-    "^/": "/api/notifications/"
+    "^/": "/api/v1/notifications/"
   })
 );
 
@@ -70,7 +70,7 @@ router.use(
   authMiddleware,
   blockCheckMiddleware,
   proxy(serviceConfig.paymentServiceUrl, {
-    "^/": "/api/payments/"
+    "^/": "/api/v1/payments/"
   })
 );
 
@@ -169,7 +169,7 @@ router.use(
   authMiddleware,
   blockCheckMiddleware,
   proxy(serviceConfig.notificationServiceUrl, {
-    "^/": "/api/user-devices/"
+    "^/": "/api/v1/user-devices/"
   })
 );
 
