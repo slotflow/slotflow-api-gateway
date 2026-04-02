@@ -1,10 +1,10 @@
-import { redisClient } from "../lib/redis";
+import { redisClient } from "../cache/redis/redis";
 import { log } from "../shared/logger/logger";
 import { Request, Response, NextFunction } from "express";
 
 export const engagedSlots = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        
+
         const { providerId, date } = req.params;
 
         const pattern = `engaged:slots:slot:${providerId}:${date}:*`;
