@@ -2,14 +2,17 @@ import http from "http";
 import app from "./app/app";
 import { appConfig } from "./config/env";
 import { log } from "./shared/logger/logger";
+import { initOtel } from "./app/init/otel.init";
 import { socketProxy } from './proxy/socketProxy';
 import { printText } from './shared/utils/printText';
 import { setupGracefulShutdown } from './app/init/shutdown';
 
 let server: http.Server;
 
-export const start = async () => {
+const start = async () => {
   try {
+    await initOtel();
+
     server = http.createServer(app);
 
     server.on("upgrade", (req, socket, head) => {
@@ -30,3 +33,5 @@ export const start = async () => {
     process.exit(1);
   }
 };
+
+start();

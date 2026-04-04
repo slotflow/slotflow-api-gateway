@@ -1,5 +1,7 @@
 import dotenv from 'dotenv';
-dotenv.config();
+dotenv.config({
+    debug: true
+});
 
 import { Validator } from '../shared/validator/validator';
 
@@ -33,5 +35,7 @@ export const serviceConfig = {
 };
 
 export const otelConfig = {
-    otelExporterOtlpEndpoint: appConfig.isDev ? validator.requireEnv("OTEL_EXPORTER_OTLP_ENDPOINT_DEV") : validator.requireEnv("OTEL_EXPORTER_OTLP_ENDPOINT"),
+    otelExporterOtlpTracesEndpoint: appConfig.isDev ? validator.requireEnv("OTEL_EXPORTER_OTLP_TRACES_ENDPOINT_DEV") : validator.requireEnv("OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"),
+    otelExporterOtlpMetricsEndpoint: appConfig.isDev ? validator.requireEnv("OTEL_EXPORTER_OTLP_METRICS_ENDPOINT_DEV") : validator.requireEnv("OTEL_EXPORTER_OTLP_METRICS_ENDPOINT"),
+    otelExporterOtlpLogsEndpoint: appConfig.isDev ? validator.requireEnv("OTEL_EXPORTER_OTLP_LOGS_ENDPOINT_DEV") : validator.requireEnv("OTEL_EXPORTER_OTLP_LOGS_ENDPOINT"),
 };

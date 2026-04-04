@@ -1,11 +1,11 @@
 import cors from "cors";
 import express from "express";
-import routes from "./routes/apiRoutes";
+import routes from "../routes/apiRoutes";
 import cookieParser from "cookie-parser";
-import { serviceConfig } from "./config/env";
-import { socketProxy } from "./proxy/socketProxy";
-import { authMiddleware } from "./middleware/auth.middleware";
-import { blockCheckMiddleware } from "./middleware/blockCheck.middleware";
+import { serviceConfig } from "../config/env";
+import { socketProxy } from "../proxy/socketProxy";
+import { authMiddleware } from "../middleware/auth.middleware";
+import { blockCheckMiddleware } from "../middleware/blockCheck.middleware";
 
 const app = express();
 
