@@ -18,7 +18,6 @@ router.use(authMiddleware);
 
 router.use(
   "/addresses",
-  authMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/api/v1/addresses/"
   })
@@ -26,7 +25,6 @@ router.use(
 
 router.use(
   "/admin-dashboard",
-  authMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/api/v1/admin-dashboard/"
   })
@@ -34,14 +32,12 @@ router.use(
 
 router.use(
   "/bookings",
-  authMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/api/v1/bookings/"
   })
 );
 
 router.use("/google",
-  authMiddleware,
   blockCheckMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/api/v1/google/",
@@ -49,7 +45,6 @@ router.use("/google",
 
 router.use(
   "/messages",
-  authMiddleware,
   blockCheckMiddleware,
   proxy(serviceConfig.realtimeServiceUrl, {
     "^/": "/api/messages/"
@@ -58,7 +53,6 @@ router.use(
 
 router.use(
   "/notifications",
-  authMiddleware,
   blockCheckMiddleware,
   proxy(serviceConfig.notificationServiceUrl, {
     "^/": "/api/v1/notifications/"
@@ -67,7 +61,6 @@ router.use(
 
 router.use(
   "/payments",
-  authMiddleware,
   blockCheckMiddleware,
   proxy(serviceConfig.paymentServiceUrl, {
     "^/": "/api/v1/payments/"
@@ -76,7 +69,6 @@ router.use(
 
 router.use(
   "/plans",
-  authMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/api/v1/plans/"
   })
@@ -84,7 +76,6 @@ router.use(
 
 router.use(
   "/providers",
-  authMiddleware,
   blockCheckMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/api/v1/providers/"
@@ -93,7 +84,6 @@ router.use(
 
 router.use(
   "/provider-services",
-  authMiddleware,
   blockCheckMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/api/v1/provider-services/"
@@ -102,21 +92,18 @@ router.use(
 
 router.use(
   "/reviews",
-  authMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/api/v1/reviews/"
   })
 );
 
 router.use("/s3",
-  authMiddleware,
   blockCheckMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/api/v1/s3/",
   }));
 
 router.use("/services",
-  authMiddleware,
   blockCheckMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/api/v1/services/",
@@ -125,14 +112,12 @@ router.use("/services",
 
   router.get(
   '/service-availabilities/engaged-slots/:providerId/:date',
-  authMiddleware,
   blockCheckMiddleware,
   engagedSlots
 )
 
 router.use(
   "/service-availabilities",
-  authMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/api/v1/service-availabilities/"
   })
@@ -140,7 +125,6 @@ router.use(
 
 router.use(
   "/subscriptions",
-  authMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/api/v1/subscriptions/"
   })
@@ -148,7 +132,6 @@ router.use(
 
 router.use(
   "/users",
-  authMiddleware,
   blockCheckMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/api/v1/users/"
@@ -157,7 +140,6 @@ router.use(
 
 router.use(
   "/provider-dashboard",
-  authMiddleware,
   blockCheckMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/api/v1/provider-dashboard/"
@@ -166,7 +148,6 @@ router.use(
 
 router.use(
   "/user-devices",
-  authMiddleware,
   blockCheckMiddleware,
   proxy(serviceConfig.notificationServiceUrl, {
     "^/": "/api/v1/user-devices/"

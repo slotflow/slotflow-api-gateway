@@ -5,7 +5,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 
 interface AccessTokenPayload extends JwtPayload {
-  userOrProviderId: string;
+  userId: string;
   role: Role;
 };
 
@@ -35,7 +35,7 @@ export const authMiddleware = (
     };
 
     req.user = {
-      id: payload.userOrProviderId,
+      id: payload.userId,
       role: payload.role,
     };
 
