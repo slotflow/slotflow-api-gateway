@@ -4,6 +4,7 @@ import routes from "../routes/apiRoutes";
 import cookieParser from "cookie-parser";
 import { serviceConfig } from "../config/env";
 import { socketProxy } from "../proxy/socketProxy";
+import { errorHandler } from "../middleware/error.middleware";
 import { authMiddleware } from "../middleware/auth.middleware";
 import { blockCheckMiddleware } from "../middleware/blockCheck.middleware";
 
@@ -35,5 +36,6 @@ app.use(
 app.get("/", (_, res) => {
   res.json({ status: "gateway online" });
 });
+app.use(errorHandler);
 
 export default app;

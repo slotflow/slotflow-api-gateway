@@ -11,7 +11,7 @@ let server: http.Server;
 
 const start = async () => {
   try {
-    await initOtel();
+    // await initOtel();
 
     server = http.createServer(app);
 

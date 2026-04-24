@@ -110,7 +110,7 @@ router.use("/services",
   }));
 
 
-  router.get(
+router.get(
   '/service-availabilities/engaged-slots/:providerId/:date',
   blockCheckMiddleware,
   engagedSlots
