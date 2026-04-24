@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { proxy } from "../../proxy/proxy";
 import { serviceConfig } from "../../config/env";
-import { engagedSlots } from "../../middleware/engagedSlots";
+import { engagedSlots } from "../../slotChecker/engagedSlots";
 import { authMiddleware } from "../../middleware/auth.middleware";
 import { blockCheckMiddleware } from "../../middleware/blockCheck.middleware";
 
@@ -37,7 +37,8 @@ router.use(
   })
 );
 
-router.use("/google",
+router.use(
+  "/google",
   blockCheckMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/api/v1/google/",
@@ -97,13 +98,15 @@ router.use(
   })
 );
 
-router.use("/s3",
+router.use(
+  "/s3",
   blockCheckMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/api/v1/s3/",
   }));
 
-router.use("/services",
+router.use(
+  "/services",
   blockCheckMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/api/v1/services/",
