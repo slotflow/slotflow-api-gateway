@@ -6,15 +6,11 @@ import type { Request } from "express";
 
 const socketTarget = serviceConfig.realtimeServiceUrl.replace("/api", "");
 
-
 export const socketProxy = createProxyMiddleware<IncomingMessage, ServerResponse>({
   target: socketTarget,
   ws: true,
   changeOrigin: true,
   pathFilter: "/socket.io",
-//  pathRewrite: {
-//     "^/socket.io": "/socket.io",
-//   },
   on: {
       
     proxyReq: (proxyReq, req) => {
