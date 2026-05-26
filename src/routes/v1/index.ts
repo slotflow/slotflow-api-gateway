@@ -150,6 +150,22 @@ router.use(
 );
 
 router.use(
+  "/credits",
+  blockCheckMiddleware,
+  proxy(serviceConfig.mainBackendServiceUrl, {
+    "^/": "/api/v1/credits/"
+  })
+);
+
+router.use(
+  "/referrals",
+  blockCheckMiddleware,
+  proxy(serviceConfig.mainBackendServiceUrl, {
+    "^/": "/api/v1/referrals/"
+  })
+);
+
+router.use(
   "/user-devices",
   blockCheckMiddleware,
   proxy(serviceConfig.notificationServiceUrl, {

@@ -20,7 +20,6 @@ export const engagedSlots = async (req: Request, res: Response, next: NextFuncti
         res.status(200).json({
             success: true,
             message: "Engaged slots fetched successfully",
-            statusCode: 200,
             data: engagedSlotIds
         });
 
