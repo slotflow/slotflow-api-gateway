@@ -40,7 +40,7 @@ router.use(
 router.use(
   "/google",
   blockCheckMiddleware,
-  proxy(serviceConfig.mainBackendServiceUrl, {
+  proxy(serviceConfig.notificationServiceUrl, {
     "^/": "/api/v1/google/",
   }));
 

@@ -38,11 +38,16 @@ export const proxy = (target: string, pathRewrite?: Record<string, string>) => {
 
         log.info(`expressReq.user : ${JSON.stringify(expressReq.user)}`);
 
+
         if (expressReq.user) {
-          if(expressReq.user.id) {
+          if (expressReq.user.id) {
             proxyReq.setHeader("x-user-id", expressReq.user.id);
           }
+          const timeZoneStr = JSON.stringify(expressReq.user.timeZone);
           proxyReq.setHeader("x-user-role", expressReq.user.role);
+          proxyReq.setHeader("x-user-name", expressReq.user.name);
+          proxyReq.setHeader("x-user-email", expressReq.user.email);
+          proxyReq.setHeader("x-user-timezone", timeZoneStr);
         }
 
       },

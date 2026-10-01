@@ -1,7 +1,7 @@
 import { Redis } from "@upstash/redis";
 import { log } from "../shared/logger/logger";
 import { ERROR_CODES } from "../shared/utils/types";
-import { ICacheService } from "../interfaces/ICache.service";
+import { ICacheService } from "../interfaces/service/ICache.service";
 import { AppError, BadRequestError } from "../shared/error/appError";
 
 export class CacheServiceImpl implements ICacheService {

@@ -28,6 +28,13 @@ export enum ERROR_CODES {
 
   // USER
   USER_NOT_FOUND = "USER_NOT_FOUND",
-  
-
 };
+
+// TimeZone interface
+export interface TimeZone {
+    value: string;
+    label: string;
+    offset: number;
+    abbrev: string;
+    altName: string;
+}

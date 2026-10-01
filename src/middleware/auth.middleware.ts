@@ -1,13 +1,16 @@
 import { jwtConfig } from "../config/env";
 import { log } from "../shared/logger/logger";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { ERROR_CODES, Role } from "../shared/utils/types";
 import { Request, Response, NextFunction } from "express";
+import { ERROR_CODES, Role, TimeZone } from "../shared/utils/types";
 import { AppError, UnauthorizedError } from "../shared/error/appError";
 
 interface AccessTokenPayload extends JwtPayload {
   userId: string;
   role: Role;
+  name: string;
+  email: string;
+  timeZone: TimeZone;
 };
 
 export const authMiddleware = (
@@ -25,6 +28,8 @@ export const authMiddleware = (
   try {
     const decoded = jwt.verify(token, jwtConfig.jwtSecret);
 
+    console.log("decoded : ",decoded);
+
     if (typeof decoded === "string") {
       log.error(`Invalid token: ${token}`);
       return next(new UnauthorizedError());
@@ -40,6 +45,9 @@ export const authMiddleware = (
     req.user = {
       id: payload.userId,
       role: payload.role,
+      name: payload.name,
+      email: payload.email,
+      timeZone: payload.timeZone
     };
 
     next();
