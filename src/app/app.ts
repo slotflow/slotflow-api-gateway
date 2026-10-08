@@ -28,6 +28,7 @@ app.use((req, _res, next) => {
 app.use("/api", routes);
 
 app.use(
+  "/socket.io",
   authMiddleware,
   blockCheckMiddleware,
   socketProxy
@@ -36,6 +37,7 @@ app.use(
 app.get("/", (_, res) => {
   res.json({ status: "gateway online" });
 });
+
 app.use(errorHandler);
 
 export default app;

@@ -16,7 +16,7 @@ const start = async () => {
     server = http.createServer(app);
 
     server.on("upgrade", (req, socket, head) => {
-      if (req.url?.startsWith("/socket.io")) {
+      if (req.url?.includes("/socket.io")) {
         (socketProxy as any).upgrade(req, socket, head);
       }
     });

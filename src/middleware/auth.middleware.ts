@@ -1,34 +1,58 @@
+import jwt from "jsonwebtoken";
 import { jwtConfig } from "../config/env";
 import { log } from "../shared/logger/logger";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import { AccessTokenPayload, AuthUser, ERROR_CODES } from "../shared/utils/types";
 import { Request, Response, NextFunction } from "express";
-import { ERROR_CODES, Role, TimeZone } from "../shared/utils/types";
 import { AppError, UnauthorizedError } from "../shared/error/appError";
+import { ServerResponse } from "http";
+import { Socket } from "net";
 
-interface AccessTokenPayload extends JwtPayload {
-  userId: string;
-  role: Role;
-  name: string;
-  email: string;
-  timeZone: TimeZone;
+const parseCookies = (cookieHeader?: string): Record<string, string> => {
+  const cookies: Record<string, string> = {};
+  if (!cookieHeader) return cookies;
+
+  cookieHeader.split(";").forEach((cookie) => {
+    const [name, ...rest] = cookie.split("=");
+    if (name) {
+      cookies[name.trim()] = rest.join("=").trim();
+    }
+  });
+
+  return cookies;
 };
 
 export const authMiddleware = (
   req: Request,
-  res: Response,
+  res: Response | ServerResponse | Socket,
   next: NextFunction
 ) => {
-  let token = req.cookies?.token;
+  let token: string | undefined = req.cookies?.token;
+
+  // 1. Fallback: Parse raw Cookie header if req.cookies is undefined (e.g. during WS Upgrade)
+  if (!token && req.headers.cookie) {
+    const parsedCookies = parseCookies(req.headers.cookie);
+    token = parsedCookies["token"];
+  }
+
+  // 2. Fallback: Check Authorization header ("Bearer <token>")
+  if (!token && req.headers.authorization?.startsWith("Bearer ")) {
+    token = req.headers.authorization.split(" ")[1];
+  }
+
+  // 3. Fallback: Check query params (e.g., ?token=... or ?EIO=4&token=...)
+  if (!token && req.query?.token) {
+    token = req.query.token as string;
+  }
 
   if (!token) {
-    log.error(`No token found in request. Path: ${req.path}, hasCookies: ${!!req.cookies}, cookieNames: ${req.cookies ? Object.keys(req.cookies).join(",") : "none"}`);
+    log.error(
+      `No token found in request. Path: ${req.url || req.path}, rawCookieHeader: ${!!req.headers.cookie}`
+    );
     return next(new UnauthorizedError());
-  };
+  }
 
   try {
     const decoded = jwt.verify(token, jwtConfig.jwtSecret);
-
-    console.log("decoded : ",decoded);
 
     if (typeof decoded === "string") {
       log.error(`Invalid token: ${token}`);
@@ -48,7 +72,7 @@ export const authMiddleware = (
       name: payload.name,
       email: payload.email,
       timeZone: payload.timeZone
-    };
+    } as AuthUser;
 
     next();
   } catch (error) {

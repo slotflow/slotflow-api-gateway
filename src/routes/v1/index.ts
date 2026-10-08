@@ -48,7 +48,7 @@ router.use(
   "/messages",
   blockCheckMiddleware,
   proxy(serviceConfig.realtimeServiceUrl, {
-    "^/": "/api/messages/"
+    "^/": "/api/v1/messages/"
   })
 );
 

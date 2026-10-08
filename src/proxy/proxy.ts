@@ -3,6 +3,8 @@ import { Request } from "express";
 import { log } from "../shared/logger/logger";
 import type { IncomingMessage, ServerResponse } from "http";
 import { createProxyMiddleware } from "http-proxy-middleware";
+import { attachHeaders } from "../shared/utils/attachHeader";
+import { AuthUser } from "../shared/utils/types";
 
 export const proxy = (target: string, pathRewrite?: Record<string, string>) => {
 
@@ -20,12 +22,12 @@ export const proxy = (target: string, pathRewrite?: Record<string, string>) => {
     on: {
       proxyReq: (proxyReq, req) => {
         const expressReq = req as Request;
+        const user = expressReq.user as AuthUser;
 
         const originalUrl = req.url;
         const proxiedPath = proxyReq.path;
 
         try {
-          console.log("Proxy");
           const targetUrl = new URL(target);
           log.info(
             `[GATEWAY PROXY] ${req.method} ${originalUrl} → ${targetUrl.origin}${proxiedPath}`
@@ -36,20 +38,9 @@ export const proxy = (target: string, pathRewrite?: Record<string, string>) => {
           );
         }
 
-        log.info(`expressReq.user : ${JSON.stringify(expressReq.user)}`);
-
-
-        if (expressReq.user) {
-          if (expressReq.user.id) {
-            proxyReq.setHeader("x-user-id", expressReq.user.id);
-          }
-          const timeZoneStr = JSON.stringify(expressReq.user.timeZone);
-          proxyReq.setHeader("x-user-role", expressReq.user.role);
-          proxyReq.setHeader("x-user-name", expressReq.user.name);
-          proxyReq.setHeader("x-user-email", expressReq.user.email);
-          proxyReq.setHeader("x-user-timezone", timeZoneStr);
+        if (user) {
+          attachHeaders(proxyReq, user);
         }
-
       },
 
       error: (
