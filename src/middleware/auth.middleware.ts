@@ -23,8 +23,8 @@ const parseCookies = (cookieHeader?: string): Record<string, string> => {
 
 export const authMiddleware = (
   req: Request,
-  res: Response | ServerResponse | Socket,
-  next: NextFunction
+  _res: Response | ServerResponse | Socket,
+  next: NextFunction,
 ) => {
   let token: string | undefined = req.cookies?.token;
 
@@ -46,7 +46,7 @@ export const authMiddleware = (
 
   if (!token) {
     log.error(
-      `No token found in request. Path: ${req.url || req.path}, rawCookieHeader: ${!!req.headers.cookie}`
+      `No token found in request. Path: ${req.url || req.path}, rawCookieHeader: ${!!req.headers.cookie}`,
     );
     return next(new UnauthorizedError());
   }
@@ -57,31 +57,26 @@ export const authMiddleware = (
     if (typeof decoded === "string") {
       log.error(`Invalid token: ${token}`);
       return next(new UnauthorizedError());
-    };
+    }
 
     const payload = decoded as AccessTokenPayload;
 
     if (payload.exp && payload.exp * 1000 < Date.now()) {
       log.error(`Token expired: ${token}`);
       return next(new UnauthorizedError());
-    };
+    }
 
     req.user = {
       id: payload.userId,
       role: payload.role,
       name: payload.name,
       email: payload.email,
-      timeZone: payload.timeZone
+      timeZone: payload.timeZone,
     } as AuthUser;
 
     next();
   } catch (error) {
     log.error("Error in authMiddleware", error as Error);
-    next(new AppError(
-      "Internal server error",
-      500,
-      false,
-      ERROR_CODES.INTERNAL_ERROR
-    ))
-  };
+    next(new AppError("Internal server error", 500, false, ERROR_CODES.INTERNAL_ERROR));
+  }
 };

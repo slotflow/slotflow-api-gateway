@@ -15,7 +15,6 @@ export const socketProxy = createProxyMiddleware<IncomingMessage, ServerResponse
   changeOrigin: true,
   pathFilter: (path) => path.includes("/socket.io"),
   on: {
-
     // Triggered during standard HTTP long-polling handshakes
     // Starting of socket connection we need  Standard HTTP
     // GET /socket.io/?EIO=4&transport=polling  ──> Triggers proxyReq
@@ -34,7 +33,7 @@ export const socketProxy = createProxyMiddleware<IncomingMessage, ServerResponse
       console.log("socketProxy [WS UPGRADE]: FORWARDING TO:", socketTarget + proxyReq.path);
       const expressReq = req as Request;
 
-      authMiddleware(expressReq, socket, (err?: any) => {
+      authMiddleware(expressReq, socket, (err) => {
         if (err) {
           console.error("Auth failed during WS Upgrade:", err);
           return;
@@ -54,6 +53,5 @@ export const socketProxy = createProxyMiddleware<IncomingMessage, ServerResponse
         res.destroy();
       }
     },
-
-  }
+  },
 });

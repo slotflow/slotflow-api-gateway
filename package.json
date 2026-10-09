@@ -8,11 +8,28 @@
   "packageManager": "pnpm@10.28.1",
   "type": "module",
   "scripts": {
-    "predev": "npx kill-port 3000",
     "dev": "tsx watch src/server.ts",
+    "lint:check": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format:check": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "type:check": "tsc --noEmit",
     "build": "tsc",
     "start": "node dist/server.js",
-    "bundle": "tsup src/server.ts --format esm --dts --out-dir dist-bundle"
+    "bundle": "tsup src/server.ts --format esm --dts --out-dir dist-bundle",
+    "validate": "pnpm lint:check && pnpm format:check && pnpm build",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,mjs,cjs,ts,mts,cts}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
   },
   "keywords": [],
   "dependencies": {
@@ -28,25 +45,35 @@
     "@opentelemetry/sdk-node": "^0.214.0",
     "@opentelemetry/semantic-conventions": "^1.40.0",
     "@opentelemetry/winston-transport": "^0.24.0",
+    "@upstash/ratelimit": "^2.2.0",
     "@upstash/redis": "^1.36.1",
     "chalk": "^5.6.2",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
+    "express-rate-limit": "^8.7.1",
     "figlet": "^1.11.0",
     "http-proxy-middleware": "^3.0.5",
     "jsonwebtoken": "^9.0.3",
     "winston": "^3.19.0"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/cookie-parser": "^1.4.10",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.5.0",
+    "eslint": "^10.12.0",
+    "globals": "^17.13.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
+    "prettier": "^3.9.9",
     "tsup": "^8.5.1",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.71.1",
+    "vitest": "^5.0.3"
   }
 }

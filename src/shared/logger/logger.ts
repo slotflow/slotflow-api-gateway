@@ -33,13 +33,13 @@ const prettyFormat = winston.format.combine(
       return `[${timestamp}] [${level}]: ${message}\n${stack}`;
     }
     return `[${timestamp}] [${level}]: ${message}`;
-  })
+  }),
 );
 
 const jsonFormat = winston.format.combine(
   winston.format.timestamp(),
   winston.format.errors({ stack: true }),
-  winston.format.json()
+  winston.format.json(),
 );
 
 const transports: winston.transport[] = [];
@@ -47,7 +47,7 @@ const transports: winston.transport[] = [];
 transports.push(
   new winston.transports.Console({
     format: prettyFormat,
-  })
+  }),
 );
 
 transports.push(
@@ -59,7 +59,7 @@ transports.push(
   new winston.transports.File({
     filename: path.join(logsDir, "combined.log"),
     format: jsonFormat,
-  })
+  }),
 );
 
 transports.push(new OpenTelemetryTransportV3());

@@ -7,7 +7,6 @@ import { attachHeaders } from "../shared/utils/attachHeader";
 import { AuthUser } from "../shared/utils/types";
 
 export const proxy = (target: string, pathRewrite?: Record<string, string>) => {
-
   if (!target) {
     throw new Error("Proxy target is undefined. Check environment variables.");
   }
@@ -30,12 +29,10 @@ export const proxy = (target: string, pathRewrite?: Record<string, string>) => {
         try {
           const targetUrl = new URL(target);
           log.info(
-            `[GATEWAY PROXY] ${req.method} ${originalUrl} → ${targetUrl.origin}${proxiedPath}`
+            `[GATEWAY PROXY] ${req.method} ${originalUrl} → ${targetUrl.origin}${proxiedPath}`,
           );
         } catch {
-          log.info(
-            `[GATEWAY PROXY] ${req.method} ${originalUrl} → ${target}${proxiedPath}`
-          );
+          log.info(`[GATEWAY PROXY] ${req.method} ${originalUrl} → ${target}${proxiedPath}`);
         }
 
         if (user) {
@@ -43,11 +40,7 @@ export const proxy = (target: string, pathRewrite?: Record<string, string>) => {
         }
       },
 
-      error: (
-        _err: Error,
-        _req: IncomingMessage,
-        res: ServerResponse | Socket
-      ) => {
+      error: (_err: Error, _req: IncomingMessage, res: ServerResponse | Socket) => {
         if ("destroy" in res && !("statusCode" in res)) {
           res.destroy();
           return;
@@ -58,12 +51,9 @@ export const proxy = (target: string, pathRewrite?: Record<string, string>) => {
         if (!serverRes.headersSent) {
           serverRes.statusCode = 502;
           serverRes.setHeader("Content-Type", "application/json");
-          serverRes.end(
-            JSON.stringify({ message: "Service unavailable" })
-          );
-        };
-      }
-    }
-  }
-  );
+          serverRes.end(JSON.stringify({ message: "Service unavailable" }));
+        }
+      },
+    },
+  });
 };

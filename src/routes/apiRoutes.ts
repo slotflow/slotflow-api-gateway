@@ -1,7 +1,8 @@
-import v1Routes from './v1';
+import v1Routes from "./v1";
 import { Router } from "express";
+import type { Router as ExpressRouter } from "express";
 
-const router = Router();
+const router: ExpressRouter = Router();
 
 router.use("/v1", v1Routes);
 

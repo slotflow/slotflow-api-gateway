@@ -1,17 +1,20 @@
 import { Router } from "express";
 import { proxy } from "../../proxy/proxy";
 import { serviceConfig } from "../../config/env";
+import type { Router as ExpressRouter } from "express";
 import { engagedSlots } from "../../slotChecker/engagedSlots";
 import { authMiddleware } from "../../middleware/auth.middleware";
+import { authRateLimit } from "../../middleware/rateLimit.middleware";
 import { blockCheckMiddleware } from "../../middleware/blockCheck.middleware";
 
-const router = Router();
+const router: ExpressRouter = Router();
 
 router.use(
   "/auth",
+  authRateLimit,
   proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/api/v1/auth/",
-  })
+  }),
 );
 
 router.use(authMiddleware);
@@ -19,22 +22,22 @@ router.use(authMiddleware);
 router.use(
   "/addresses",
   proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/api/v1/addresses/"
-  })
+    "^/": "/api/v1/addresses/",
+  }),
 );
 
 router.use(
   "/admin-dashboard",
   proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/api/v1/admin-dashboard/"
-  })
+    "^/": "/api/v1/admin-dashboard/",
+  }),
 );
 
 router.use(
   "/bookings",
   proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/api/v1/bookings/"
-  })
+    "^/": "/api/v1/bookings/",
+  }),
 );
 
 router.use(
@@ -42,60 +45,61 @@ router.use(
   blockCheckMiddleware,
   proxy(serviceConfig.notificationServiceUrl, {
     "^/": "/api/v1/google/",
-  }));
+  }),
+);
 
 router.use(
   "/messages",
   blockCheckMiddleware,
   proxy(serviceConfig.realtimeServiceUrl, {
-    "^/": "/api/v1/messages/"
-  })
+    "^/": "/api/v1/messages/",
+  }),
 );
 
 router.use(
   "/notifications",
   blockCheckMiddleware,
   proxy(serviceConfig.notificationServiceUrl, {
-    "^/": "/api/v1/notifications/"
-  })
+    "^/": "/api/v1/notifications/",
+  }),
 );
 
 router.use(
   "/payments",
   blockCheckMiddleware,
   proxy(serviceConfig.paymentServiceUrl, {
-    "^/": "/api/v1/payments/"
-  })
+    "^/": "/api/v1/payments/",
+  }),
 );
 
 router.use(
   "/plans",
   proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/api/v1/plans/"
-  })
+    "^/": "/api/v1/plans/",
+  }),
 );
 
 router.use(
   "/providers",
   blockCheckMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/api/v1/providers/"
-  })
+    "^/": "/api/v1/providers/",
+  }),
 );
 
 router.use(
   "/provider-services",
   blockCheckMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/api/v1/provider-services/"
-  })
+    "^/": "/api/v1/provider-services/",
+  }),
 );
 
 router.use(
   "/reviews",
   proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/api/v1/reviews/"
-  })
+    "^/": "/api/v1/reviews/",
+  }),
 );
 
 router.use(
@@ -103,74 +107,75 @@ router.use(
   blockCheckMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/api/v1/s3/",
-  }));
+  }),
+);
 
 router.use(
   "/services",
   blockCheckMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
     "^/": "/api/v1/services/",
-  }));
-
+  }),
+);
 
 router.get(
-  '/service-availabilities/engaged-slots/:providerId/:date',
+  "/service-availabilities/engaged-slots/:providerId/:date",
   blockCheckMiddleware,
-  engagedSlots
-)
+  engagedSlots,
+);
 
 router.use(
   "/service-availabilities",
   proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/api/v1/service-availabilities/"
-  })
+    "^/": "/api/v1/service-availabilities/",
+  }),
 );
 
 router.use(
   "/subscriptions",
   proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/api/v1/subscriptions/"
-  })
+    "^/": "/api/v1/subscriptions/",
+  }),
 );
 
 router.use(
   "/users",
   blockCheckMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/api/v1/users/"
-  })
+    "^/": "/api/v1/users/",
+  }),
 );
 
 router.use(
   "/provider-dashboard",
   blockCheckMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/api/v1/provider-dashboard/"
-  })
+    "^/": "/api/v1/provider-dashboard/",
+  }),
 );
 
 router.use(
   "/credits",
   blockCheckMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/api/v1/credits/"
-  })
+    "^/": "/api/v1/credits/",
+  }),
 );
 
 router.use(
   "/referrals",
   blockCheckMiddleware,
   proxy(serviceConfig.mainBackendServiceUrl, {
-    "^/": "/api/v1/referrals/"
-  })
+    "^/": "/api/v1/referrals/",
+  }),
 );
 
 router.use(
   "/user-devices",
   blockCheckMiddleware,
   proxy(serviceConfig.notificationServiceUrl, {
-    "^/": "/api/v1/user-devices/"
-  })
+    "^/": "/api/v1/user-devices/",
+  }),
 );
 
 export default router;
