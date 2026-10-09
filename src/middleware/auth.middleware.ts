@@ -1,11 +1,11 @@
+import { Socket } from "net";
 import jwt from "jsonwebtoken";
+import { ServerResponse } from "http";
 import { jwtConfig } from "../config/env";
 import { log } from "../shared/logger/logger";
-import { AccessTokenPayload, AuthUser, ERROR_CODES } from "../shared/utils/types";
 import { Request, Response, NextFunction } from "express";
 import { AppError, UnauthorizedError } from "../shared/error/appError";
-import { ServerResponse } from "http";
-import { Socket } from "net";
+import { AccessTokenPayload, AuthUser, ERROR_CODES } from "../shared/utils/types";
 
 const parseCookies = (cookieHeader?: string): Record<string, string> => {
   const cookies: Record<string, string> = {};
@@ -76,7 +76,7 @@ export const authMiddleware = (
 
     next();
   } catch (error) {
-    log.error("Error in authMiddleware", error as Error);
+    log.error("Error in authMiddleware", { error });
     next(new AppError("Internal server error", 500, false, ERROR_CODES.INTERNAL_ERROR));
   }
 };

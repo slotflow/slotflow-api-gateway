@@ -30,7 +30,7 @@ export const blockCheckMiddleware = async (req: Request, _res: Response, next: N
 
     next();
   } catch (error) {
-    log.error("Error in blockCheckMiddleware", error as Error);
+    log.error("Unexpected value thrown", { error });
     next(new AppError("Internal server error", 500, false, ERROR_CODES.INTERNAL_ERROR));
   }
 };

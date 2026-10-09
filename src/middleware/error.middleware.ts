@@ -20,7 +20,7 @@ export const errorHandler = (err: unknown, req: Request, res: Response, _next: N
     if (err.isOperational) {
       log.warn(`[Operational Error] ${req.method} ${req.url} - ${err.message}`);
     } else {
-      log.error(`[System Error] ${req.method} ${req.url}`, err);
+      log.error(`[System Error] ${req.method} ${req.url}`, { err });
     }
   } else if (isNamedError(err)) {
     if (err.name === "UnauthorizedError") {
@@ -34,7 +34,7 @@ export const errorHandler = (err: unknown, req: Request, res: Response, _next: N
 
     log.warn(`[Named Error] ${req.method} ${req.url} - ${err.name}`);
   } else {
-    log.error(`[Unexpected Error] ${req.method} ${req.url}`, err as Error);
+    log.error(`[Unexpected Error] ${req.method} ${req.url}`, { err });
   }
 
   res.status(statusCode).json({

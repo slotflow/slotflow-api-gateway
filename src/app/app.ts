@@ -1,13 +1,14 @@
 import cors from "cors";
-import express, { type Express } from "express";
 import routes from "../routes/apiRoutes";
 import cookieParser from "cookie-parser";
 import { serviceConfig } from "../config/env";
+import { log } from "../shared/logger/logger";
+import express, { type Express } from "express";
 import { socketProxy } from "../proxy/socketProxy";
 import { errorHandler } from "../middleware/error.middleware";
 import { authMiddleware } from "../middleware/auth.middleware";
-import { blockCheckMiddleware } from "../middleware/blockCheck.middleware";
 import { globalRateLimit } from "../middleware/rateLimit.middleware";
+import { blockCheckMiddleware } from "../middleware/blockCheck.middleware";
 
 const app: Express = express();
 
@@ -26,7 +27,10 @@ app.use(
 app.use(cookieParser());
 
 app.use((req, _res, next) => {
-  console.log("Incoming request:", req.method, req.url);
+  log.debug("Incoming request", {
+    method: req.method,
+    path: req.path,
+  });
   next();
 });
 

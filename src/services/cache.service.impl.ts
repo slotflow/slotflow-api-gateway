@@ -15,7 +15,7 @@ export class CacheServiceImpl implements ICacheService {
       const updatedKey: string = `user:block-status:${key}`;
       return await this.redisClient.get(updatedKey);
     } catch (error) {
-      log.error("getBlockList failed", error as Error);
+      log.error("getBlockList failed", { error });
       throw new AppError("Internal server error", 500, false, ERROR_CODES.INTERNAL_ERROR);
     }
   }

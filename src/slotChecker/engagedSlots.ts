@@ -23,7 +23,7 @@ export const engagedSlots = async (req: Request, res: Response, next: NextFuncti
       data: engagedSlotIds,
     });
   } catch (error) {
-    log.error("Error in engagedSlots middleware", error as Error);
+    log.error("Error in engagedSlots middleware", { error });
     next(new AppError("Internal server error", 500, false, ERROR_CODES.INTERNAL_ERROR));
   }
 };

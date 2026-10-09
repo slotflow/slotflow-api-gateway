@@ -33,7 +33,7 @@ const start = async () => {
 
     setupGracefulShutdown(server);
   } catch (error) {
-    log.error("Failed to start API Gateway", error as Error);
+    log.error("Failed to start API Gateway", { error });
     process.exit(1);
   }
 };

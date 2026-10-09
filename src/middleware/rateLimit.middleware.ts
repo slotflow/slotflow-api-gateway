@@ -1,5 +1,5 @@
 import { Redis } from "@upstash/redis";
-import { appConfig } from "../config/env";
+import { log } from "../shared/logger/logger";
 import { Ratelimit } from "@upstash/ratelimit";
 import { ERROR_CODES } from "../shared/utils/types";
 import type { Request, Response, NextFunction } from "express";
@@ -64,10 +64,16 @@ export function createRateLimit(options: {
 
       next();
     } catch (error) {
-      if (appConfig.isDev) {
-        // Fail closed, reject requests if the limiter cannot be checked.
-        console.error("[RateLimit] Redis check failed", error);
-      }
+      log.error("[RateLimit] Redis check failed", {
+        error:
+          error instanceof Error
+            ? {
+                name: error.name,
+                message: error.message,
+                stack: error.stack,
+              }
+            : String(error),
+      });
 
       res.status(503).json({
         success: false,

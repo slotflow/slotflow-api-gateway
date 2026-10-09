@@ -2,7 +2,6 @@ import { AuthUser } from "./types";
 import { ClientRequest } from "node:http";
 
 export const attachHeaders = (proxyReq: ClientRequest, user: AuthUser) => {
-  console.log("user : ", user);
   if (user.id) {
     proxyReq.setHeader("x-user-id", encodeURIComponent(String(user.id)));
   }

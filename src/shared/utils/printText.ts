@@ -1,5 +1,6 @@
 import chalk from "chalk";
 import figlet from "figlet";
+import { log } from "../logger/logger";
 import { appConfig } from "../../config/env";
 
 export const printText = () => {
@@ -9,8 +10,9 @@ export const printText = () => {
       chalk.white("SERVICE : "),
       chalk.hex("#635bff").bold(appConfig.serviceName.toUpperCase()),
     );
-  } catch (err) {
-    console.log("Something went wrong...");
-    console.error(err);
+  } catch (err: unknown) {
+    log.error("Failed to print startup banner", {
+      error: err instanceof Error ? err.message : String(err),
+    });
   }
 };
