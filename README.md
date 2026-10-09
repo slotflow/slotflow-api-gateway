@@ -1,5 +1,3 @@
-<div>
-
 <div align="center">
 
 # SlotFlow API Gateway
@@ -41,10 +39,14 @@ A TypeScript and Express gateway for routing SlotFlow API traffic, validating ac
 <img src="https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=prometheus&logoColor=white" alt="Prometheus" />
 <img src="https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white" alt="Grafana" />
 <img src="https://img.shields.io/badge/Winston-logging-231F20?style=for-the-badge" alt="Winston logging" />
-<img src="https://img.shields.io/badge/OpenTelemetry-traces%20%7C%20metrics%20%7C%20logs-7B3FE4?style=for-the-badge&logo=opentelemetry&logoColor=white" alt="OpenTelemetry" />
+<img src="https://img.shields.io/badge/Zod-3E67B1?style=for-the-badge" alt="Zod" />
 <img src="https://img.shields.io/badge/Upstash-Redis-00E9A3?style=for-the-badge&logo=upstash&logoColor=white" alt="Upstash Redis" />
 <img src="https://img.shields.io/badge/pnpm-10.28.1-F69220?style=for-the-badge&logo=pnpm&logoColor=white" alt="pnpm 10.28.1" />
+<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
+<img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white" alt="AWS" />
 </div>
+
+---
 
 ## Overview
 
