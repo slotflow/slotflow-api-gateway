@@ -1,3 +1,5 @@
+<div>
+
 <div align="center">
 
 # SlotFlow API Gateway
@@ -6,53 +8,42 @@
 
 A TypeScript and Express gateway for routing SlotFlow API traffic, validating access tokens, and proxying Socket.IO connections to backend services.
 
-<p>
   <img src="https://img.shields.io/badge/status-source--documented-2ea44f?style=for-the-badge" alt="Status: source documented" />
   <img src="https://img.shields.io/badge/architecture-microservices-635bff?style=for-the-badge" alt="Microservice architecture" />
   <img src="https://img.shields.io/badge/runtime-Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js runtime" />
   <img src="https://img.shields.io/badge/language-TypeScript-3178c6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
   <img src="https://img.shields.io/badge/deployment-not%20specified-lightgrey?style=for-the-badge" alt="Deployment platform not specified" />
-</p>
-
-**Express · HTTP Proxy · Socket.IO Proxy · JWT · Upstash Redis · OpenTelemetry**
-
-[SlotFlow Client](https://github.com/slotflow/slotflow-client) · [Backend Repositories](#related-repositories)
-
-</div>
 
 ---
 
-## Technology Stack
+### Live link & Repositories
 
-<div align="center">
+  <a href="https://slotflow.online">
+    <img src="https://img.shields.io/badge/Live_Application-SlotFlow-181717?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Application" />
+  </a>
+  <a href="https://github.com/slotflow">
+    <img src="https://img.shields.io/badge/GitHub-SlotFlow-181717?style=for-the-badge&logo=github&logoColor=white" alt="SlotFlow GitHub" />
+  </a>
 
-**Backend**
+### Technology Stack
 
 <img src="https://img.shields.io/badge/Node.js-runtime-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
 <img src="https://img.shields.io/badge/Express-5-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express 5" />
 <img src="https://img.shields.io/badge/TypeScript-5.9-3178c6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
-
-**Networking**
-
 <img src="https://img.shields.io/badge/HTTP-Proxying-00599C?style=for-the-badge" alt="HTTP proxying" />
 <img src="https://img.shields.io/badge/Socket.IO-WebSocket%20proxy-010101?style=for-the-badge&logo=socketdotio&logoColor=white" alt="Socket.IO and WebSocket proxying" />
-
-**Security and Request Protection**
-
 <img src="https://img.shields.io/badge/JWT-authentication-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white" alt="JWT authentication" />
 <img src="https://img.shields.io/badge/CORS-configured-635bff?style=for-the-badge" alt="CORS" />
 <img src="https://img.shields.io/badge/Upstash-Redis%20rate%20limits-00E9A3?style=for-the-badge&logo=upstash&logoColor=white" alt="Upstash Redis rate limits" />
-
-**Observability**
-
+<img src="https://img.shields.io/badge/OpenTelemetry-7B3FF2?style=for-the-badge&logo=opentelemetry&logoColor=white" alt="OpenTelemetry" />
+<img src="https://img.shields.io/badge/Tempo-F46800?style=for-the-badge&logo=grafana&logoColor=white" alt="Grafana Tempo" />
+<img src="https://img.shields.io/badge/Loki-F46800?style=for-the-badge&logo=grafana&logoColor=white" alt="Grafana Loki" />
+<img src="https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=prometheus&logoColor=white" alt="Prometheus" />
+<img src="https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white" alt="Grafana" />
 <img src="https://img.shields.io/badge/Winston-logging-231F20?style=for-the-badge" alt="Winston logging" />
 <img src="https://img.shields.io/badge/OpenTelemetry-traces%20%7C%20metrics%20%7C%20logs-7B3FE4?style=for-the-badge&logo=opentelemetry&logoColor=white" alt="OpenTelemetry" />
-
-**Infrastructure Integration**
-
 <img src="https://img.shields.io/badge/Upstash-Redis-00E9A3?style=for-the-badge&logo=upstash&logoColor=white" alt="Upstash Redis" />
 <img src="https://img.shields.io/badge/pnpm-10.28.1-F69220?style=for-the-badge&logo=pnpm&logoColor=white" alt="pnpm 10.28.1" />
-
 </div>
 
 ## Overview
@@ -207,11 +198,23 @@ Only repositories with verified GitHub URLs are linked below. The backend target
 
 Copyright © 2026 SlotFlow.
 
-The SlotFlow api gateway source code and associated assets are proprietary and confidential property of SlotFlow Technologies Private Limited.
+The SlotFlow source code and associated assets are proprietary and confidential
+property of SlotFlow.
 
-No permission is granted to use, copy, modify, redistribute, sublicense, or commercialize this software without explicit written permission from SlotFlow.
+No permission is granted to any person or organization to:
 
-Viewing the source code does not grant any license or rights to use, modify, distribute, or deploy the software.
+- Use the software for personal, commercial, or production purposes
+- Copy, reproduce, or redistribute the source code
+- Modify, adapt, or create derivative works
+- Sell, sublicense, lease, or otherwise commercialize the software
+- Incorporate any portion of the software into another product or service
+- Host or deploy the software without explicit written permission
+
+Viewing the source code on GitHub does not grant any license or rights to use,
+modify, distribute, or commercialize the software.
+
+Any use beyond viewing the repository requires prior written permission from
+SlotFlow.
 
 All rights reserved.
 
