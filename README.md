@@ -1,4 +1,4 @@
-<div align="center">
+ <div align="center">
 
 # SlotFlow API Gateway
 
@@ -6,22 +6,22 @@
 
 A TypeScript and Express gateway for routing SlotFlow API traffic, validating access tokens, and proxying Socket.IO connections to backend services.
 
-  <img src="https://img.shields.io/badge/status-source--documented-2ea44f?style=for-the-badge" alt="Status: source documented" />
-  <img src="https://img.shields.io/badge/architecture-microservices-635bff?style=for-the-badge" alt="Microservice architecture" />
-  <img src="https://img.shields.io/badge/runtime-Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js runtime" />
-  <img src="https://img.shields.io/badge/language-TypeScript-3178c6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/deployment-not%20specified-lightgrey?style=for-the-badge" alt="Deployment platform not specified" />
+<img src="https://img.shields.io/badge/status-source--documented-2ea44f?style=for-the-badge" alt="Status: source documented" />
+<img src="https://img.shields.io/badge/architecture-microservices-635bff?style=for-the-badge" alt="Microservice architecture" />
+<img src="https://img.shields.io/badge/runtime-Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js runtime" />
+<img src="https://img.shields.io/badge/language-TypeScript-3178c6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+<img src="https://img.shields.io/badge/deployment-environment--configurable-lightgrey?style=for-the-badge" alt="Environment-configurable deployment" />
 
 ---
 
 ### Live link & Repositories
 
-  <a href="https://slotflow.online">
-    <img src="https://img.shields.io/badge/Live_Application-SlotFlow-181717?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Application" />
-  </a>
-  <a href="https://github.com/slotflow">
-    <img src="https://img.shields.io/badge/GitHub-SlotFlow-181717?style=for-the-badge&logo=github&logoColor=white" alt="SlotFlow GitHub" />
-  </a>
+<a href="https://slotflow.online">
+  <img src="https://img.shields.io/badge/Live_Application-SlotFlow-181717?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Application" />
+</a>
+<a href="https://github.com/slotflow">
+  <img src="https://img.shields.io/badge/GitHub-SlotFlow-181717?style=for-the-badge&logo=github&logoColor=white" alt="SlotFlow GitHub" />
+</a>
 
 ### Technology Stack
 
@@ -52,9 +52,9 @@ A TypeScript and Express gateway for routing SlotFlow API traffic, validating ac
 
 The API Gateway is the client-facing entry point for SlotFlow's backend services. It accepts API requests under `/api`, applies gateway-level middleware, and forwards service-specific traffic to configured backend URLs. It also handles the `/socket.io` path for the realtime service.
 
-The frontend can communicate with backend services through the gateway rather than addressing each service directly. The gateway verifies JWTs for protected API routes, propagates authenticated user details to downstream services in `x-user-*` headers, applies request limits, and routes realtime traffic separately from ordinary HTTP requests.
+The frontend communicates with backend services through the gateway rather than addressing each service directly. The gateway verifies JWTs for protected API routes, propagates authenticated user details to downstream services in `x-user-*` headers, applies request limits, and routes realtime traffic separately from ordinary HTTP requests.
 
-This repository implements routing and gateway middleware. Business logic, payment processing, realtime message handling, and notification delivery belong to downstream services and are not implemented here.
+The gateway provides centralized routing and middleware, while business logic, payment processing, realtime message handling, and notification delivery are handled by their respective downstream services.
 
 ## Core Features
 
@@ -73,16 +73,16 @@ This repository implements routing and gateway middleware. Business logic, payme
 
 - Accepts a JWT from the `token` cookie, a `Bearer` authorization header, or a `token` query parameter.
 - Verifies tokens with the configured `JWT_SECRET` and attaches the decoded user identity to the Express request.
-- Leaves `/api/v1/auth` in front of the gateway authentication middleware so authentication endpoints can be proxied without an existing gateway-authenticated user.
+- Routes `/api/v1/auth` through the gateway before protected-route authentication, allowing authentication endpoints to be proxied without an existing gateway-authenticated user.
 - Checks cached block status for selected user-facing routes and rejects blocked accounts.
-- Does not implement per-role authorization rules at the gateway; downstream services remain responsible for their own authorization and business rules.
-- The Express Socket.IO route applies authentication and block-status middleware to HTTP polling requests.
+- Delegates per-role authorization rules and business-specific access policies to downstream services.
+- Applies authentication and block-status middleware to HTTP polling requests on the Express Socket.IO route.
 
 ### CORS, Cookies, and Request Handling
 
 - Allows the configured frontend origin with credentials.
-- Allows `GET`, `POST`, `PUT`, `DELETE`, and `PATCH`, and the configured request headers listed in the middleware.
-- Parses cookies and trusts one proxy hop when determining the client IP used by rate limiting.
+- Allows `GET`, `POST`, `PUT`, `DELETE`, and `PATCH`, along with the configured request headers listed in the middleware.
+- Parses cookies and trusts one proxy hop when determining the client IP used for rate limiting.
 - Logs incoming HTTP method and path at debug level.
 
 ### Rate Limiting and Error Handling
@@ -91,20 +91,20 @@ This repository implements routing and gateway middleware. Business logic, payme
 - Applies a separate limit of 10 requests per identifier per minute to `/api/v1/auth`.
 - Sends standard rate-limit headers and returns `429` when a limit is exceeded; if the rate-limit Redis check fails, returns `503`.
 - Normalizes application errors into JSON responses and logs operational, named, and unexpected errors.
-- Exposes `GET /` as a basic `{"status":"gateway online"}` response. This is a process-level response, not a downstream readiness check.
+- Exposes `GET /` as a basic `{"status":"gateway online"}` response for gateway process status.
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-    Client[SlotFlow Client]
-    Gateway[API Gateway<br/>Express · JWT · CORS · Rate Limits]
-    Main[Main Backend]
-    Realtime[Realtime Service]
-    Notify[Notification Service]
-    Payment[Payment Service]
-    Redis[(Upstash Redis)]
-    OTel[OTLP Collector<br/>configured endpoint]
+    Client["SlotFlow Client"]
+    Gateway["API Gateway<br/>Express · JWT · CORS · Rate Limits"]
+    Main["Main Backend"]
+    Realtime["Realtime Service"]
+    Notify["Notification Service"]
+    Payment["Payment Service"]
+    Redis[("Upstash Redis")]
+    OTel["OTLP Collector<br/>Configured Endpoint"]
 
     Client -->|HTTP /api/v1/*| Gateway
     Client -->|Socket.IO /socket.io| Gateway
@@ -112,19 +112,19 @@ flowchart LR
     Gateway -->|HTTP proxy| Realtime
     Gateway -->|HTTP proxy| Notify
     Gateway -->|HTTP proxy| Payment
-    Gateway -->|block status, engaged-slot keys| Redis
-    Gateway -.->|traces, metrics, logs| OTel
+    Gateway -->|Block status, engaged-slot keys| Redis
+    Gateway -.->|Traces, metrics, logs| OTel
 ```
 
 The client sends ordinary API requests and Socket.IO traffic to the gateway. Express middleware handles CORS, cookies, rate limiting, and authentication before API routes are dispatched. HTTP proxy middleware rewrites selected paths and forwards requests to configured service URLs. The Socket.IO proxy handles polling and WebSocket upgrades separately.
 
-Redis is used directly for cached account-block checks and engaged-slot key lookup. A Redis-backed Upstash rate limiter provides request limits. OpenTelemetry exporters are configured to send telemetry to OTLP endpoints supplied through the environment. The collector and backend services are external dependencies; this repository does not provision them.
+Redis supports cached account-block checks and engaged-slot key lookups. A Redis-backed Upstash rate limiter provides request limits. OpenTelemetry exporters send telemetry to OTLP endpoints supplied through the environment. The gateway integrates with external collector and backend services for observability.
 
-Service targets are selected from environment variables; no dynamic service-discovery component is configured here. The gateway has no Kafka integration in its dependencies or source code.
+Service targets are selected from environment variables, providing environment-specific routing configuration. The gateway focuses on HTTP and Socket.IO routing, authentication middleware, caching, rate limiting, and telemetry export.
 
 ### Realtime Routing
 
-The gateway forwards paths containing `/socket.io` to the realtime service URL. This supports Socket.IO's HTTP polling handshake and WebSocket upgrades. The HTTP and WebSocket proxy paths use separate proxy callbacks; neither creates a separate public realtime host.
+The gateway forwards paths containing `/socket.io` to the realtime service URL. This supports Socket.IO's HTTP polling handshake and WebSocket upgrades. The HTTP and WebSocket proxy paths use separate proxy callbacks while sharing the gateway's public entry point.
 
 ## Security and Middleware
 
@@ -135,8 +135,8 @@ The gateway forwards paths containing `/socket.io` to the realtime service URL. 
 - **Rate limits:** API-wide and authentication limits use Upstash's Redis-backed sliding-window limiter. The global and auth limits are keyed by client IP in the current middleware order because the global limiter and auth limiter execute before route authentication.
 - **CORS:** A single configured frontend origin is allowed with credentials; the allowed methods and headers are explicitly set in the Express app.
 - **Proxy identity forwarding:** The gateway forwards identity values in `x-user-*` headers after token verification.
-- **Cookie handling:** `cookie-parser` makes the `token` cookie available to the authentication middleware. No cookie attributes are set by this gateway.
-- **Error responses:** Unexpected internal details are not included in ordinary production error responses. Stack traces are added only when `NODE_ENV` is `development`.
+- **Cookie handling:** `cookie-parser` makes the `token` cookie available to the authentication middleware. Cookie attributes are managed by the components responsible for issuing cookies.
+- **Error responses:** Unexpected internal details are excluded from ordinary production error responses. Stack traces are added only when `NODE_ENV` is `development`.
 
 ## Project Structure
 
@@ -144,19 +144,19 @@ The gateway forwards paths containing `/socket.io` to the realtime service URL. 
 slotflow-api-gateway/
 │
 ├── src/
-    ├── app/
-    ├── cache/
-    ├── config/
-    ├── express.d.ts
-    ├── interfaces/
-    ├── middleware/
-    ├── observability/
-    ├── proxy/
-    ├── routes/
-    ├── server.ts
-    ├── services/
-    ├── shared/
-    └── slotChecker/
+│   ├── app/
+│   ├── cache/
+│   ├── config/
+│   ├── express.d.ts
+│   ├── interfaces/
+│   ├── middleware/
+│   ├── observability/
+│   ├── proxy/
+│   ├── routes/
+│   ├── server.ts
+│   ├── services/
+│   ├── shared/
+│   └── slotChecker/
 ```
 
 ## Observability
@@ -166,14 +166,14 @@ slotflow-api-gateway/
 - **Metrics:** Metrics are exported over OTLP/gRPC every 10 seconds by the configured periodic metric reader.
 - **Logs:** OpenTelemetry logs are exported over OTLP/HTTP.
 - **Resource attributes:** The service name comes from `SERVICE_NAME`; the resource also includes version `1.0.0` and a development/production environment attribute.
-- **Health response:** `GET /` returns a simple gateway-online JSON response. It does not check Redis, exporters, or downstream services.
+- **Health response:** `GET /` returns a gateway-online JSON response for process-level status.
 - **Shutdown:** `SIGINT` and `SIGTERM` initiate OpenTelemetry shutdown and then close the HTTP server.
 
-The receiver endpoints and any collector, metrics backend, log backend, or trace backend are externally configured. This repository does not include their deployment or dashboard configuration.
+The observability pipeline integrates with externally configured OTLP receivers and compatible metrics, logging, and tracing backends. Collector endpoints and backend configuration are supplied through the deployment environment.
 
 ## Related Repositories
 
-Only repositories with verified GitHub URLs are linked below. The backend targets correspond to services configured by this gateway; the infrastructure repository is related context and is not provisioned by this project.
+Explore the SlotFlow platform repositories:
 
 <div align="center">
 
@@ -192,7 +192,7 @@ Only repositories with verified GitHub URLs are linked below. The backend target
 - Keeps routing targets configurable per environment rather than embedding service URLs in route definitions.
 - Centralizes token verification, identity propagation, CORS, selected account-block checks, and Redis-backed rate limits.
 - Supports HTTP proxying and Socket.IO polling/WebSocket upgrades while leaving business behavior in the owning services.
-- Exports logs, traces, and metrics through OpenTelemetry without coupling the gateway to a specific telemetry backend.
+- Exports logs, traces, and metrics through OpenTelemetry, supporting integration with a range of telemetry backends.
 
 ## License
 
@@ -200,8 +200,7 @@ Only repositories with verified GitHub URLs are linked below. The backend target
 
 Copyright © 2026 SlotFlow.
 
-The SlotFlow source code and associated assets are proprietary and confidential
-property of SlotFlow.
+The SlotFlow source code and associated assets are proprietary and confidential property of SlotFlow.
 
 No permission is granted to any person or organization to:
 
@@ -212,11 +211,9 @@ No permission is granted to any person or organization to:
 - Incorporate any portion of the software into another product or service
 - Host or deploy the software without explicit written permission
 
-Viewing the source code on GitHub does not grant any license or rights to use,
-modify, distribute, or commercialize the software.
+Viewing the source code on GitHub does not grant any license or rights to use, modify, distribute, or commercialize the software.
 
-Any use beyond viewing the repository requires prior written permission from
-SlotFlow.
+Any use beyond viewing the repository requires prior written permission from SlotFlow.
 
 All rights reserved.
 
