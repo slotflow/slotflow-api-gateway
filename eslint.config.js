@@ -22,6 +22,7 @@ export default tseslint.config(
         {
           args: "all",
           argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
         },
       ],
     },

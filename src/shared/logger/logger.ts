@@ -1,8 +1,9 @@
 import path from "path";
 import winston from "winston";
+import { LogMeta } from "../types/types";
 import { existsSync, mkdirSync } from "fs";
-import { OpenTelemetryTransportV3 } from "@opentelemetry/winston-transport";
 import { appConfig } from "../../config/env";
+import { OpenTelemetryTransportV3 } from "@opentelemetry/winston-transport";
 
 const logsDir = path.resolve("logs");
 
@@ -25,8 +26,6 @@ winston.addColors({
   http: "magenta",
   debug: "blue",
 });
-
-type LogMeta = Record<string, unknown>;
 
 const consoleFormat = winston.format.combine(
   winston.format.errors({ stack: true }),

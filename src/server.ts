@@ -1,18 +1,14 @@
+import http from "http";
 import app from "./app/app";
-import { Duplex } from "stream";
-import http, { IncomingMessage } from "http";
 import { appConfig } from "./config/env";
 import { log } from "./shared/logger/logger";
 import { initOtel } from "./app/init/otel.init";
 import { socketProxy } from "./proxy/socketProxy";
 import { printText } from "./shared/utils/printText";
+import { WebSocketProxy } from "./shared/types/types";
 import { setupGracefulShutdown } from "./app/init/shutdown";
 
 let server: http.Server;
-
-type WebSocketProxy = typeof socketProxy & {
-  upgrade: (req: IncomingMessage, socket: Duplex, head: Buffer) => void;
-};
 
 const start = async () => {
   try {
