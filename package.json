@@ -16,11 +16,10 @@
     "test": "vitest",
     "test:run": "vitest run",
     "type:check": "tsc --noEmit",
-    "build": "tsc",
+    "build": "tsc && tsc-alias --resolve-full-paths",
     "start": "node dist/server.js",
     "bundle": "tsup src/server.ts --format esm --dts --out-dir dist-bundle",
-    "validate": "pnpm lint:check && pnpm format:check && pnpm build",
-    "prepare": "husky"
+    "validate": "pnpm lint:check && pnpm format:check && pnpm build"
   },
   "lint-staged": {
     "*.{js,mjs,cjs,ts,mts,cts}": [
@@ -33,7 +32,6 @@
   },
   "keywords": [],
   "dependencies": {
-    "@opentelemetry/api": "^1.9.1",
     "@opentelemetry/auto-instrumentations-node": "^0.72.0",
     "@opentelemetry/exporter-logs-otlp-http": "^0.214.0",
     "@opentelemetry/exporter-metrics-otlp-grpc": "^0.214.0",
@@ -52,7 +50,6 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
-    "express-rate-limit": "^8.7.1",
     "figlet": "^1.11.0",
     "http-proxy-middleware": "^3.0.5",
     "jsonwebtoken": "^9.0.3",
@@ -70,6 +67,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^17.6.0",
     "prettier": "^3.9.9",
+    "tsc-alias": "^1.9.7",
     "tsup": "^8.5.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",

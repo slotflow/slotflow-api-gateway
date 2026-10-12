@@ -1,10 +1,8 @@
-import { Redis } from "@upstash/redis";
 import { log } from "../shared/logger/logger";
 import { Ratelimit } from "@upstash/ratelimit";
+import { redisClient } from "../cache/redis/redis";
 import { ERROR_CODES } from "../shared/utils/types";
 import type { Request, Response, NextFunction } from "express";
-
-const redis = Redis.fromEnv();
 
 type AuthenticatedRequest = Request & {
   user?: {
@@ -36,7 +34,7 @@ export function createRateLimit(options: {
   prefix: string;
 }) {
   const limiter = new Ratelimit({
-    redis,
+    redis: redisClient,
     limiter: Ratelimit.slidingWindow(options.limit, options.window),
     prefix: options.prefix,
     analytics: true,

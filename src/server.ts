@@ -6,7 +6,7 @@ import { initOtel } from "./app/init/otel.init";
 import { socketProxy } from "./proxy/socketProxy";
 import { printText } from "./shared/utils/printText";
 import { WebSocketProxy } from "./shared/types/types";
-import { setupGracefulShutdown } from "./app/init/shutdown";
+import { setupGracefulShutdown } from "./app/init/shutdown.ts";
 
 let server: http.Server;
 
