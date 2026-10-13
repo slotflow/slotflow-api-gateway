@@ -1,7 +1,10 @@
 import dotenv from "dotenv";
-dotenv.config({
-  debug: true,
-});
+
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config({
+    debug: true,
+  });
+}
 
 import { Validator } from "../shared/validator/validator";
 

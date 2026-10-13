@@ -1,6 +1,6 @@
 # Building the TypeScript application ( Build stage )
 
-# Use Node.js 24 on Debian as the build environment.
+# Use Node.js 24 on Debian as the build environment ( debian 12 codename is bookworm ) .
 FROM node:24-bookworm-slim AS builder
 
 # Set the working directory inside the container.

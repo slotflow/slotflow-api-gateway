@@ -1,4 +1,5 @@
 import cors from "cors";
+import { readFileSync } from "node:fs";
 import routes from "../routes/apiRoutes";
 import cookieParser from "cookie-parser";
 import { serviceConfig } from "../config/env";
@@ -11,6 +12,11 @@ import { globalRateLimit } from "../middleware/rateLimit.middleware";
 import { blockCheckMiddleware } from "../middleware/blockCheck.middleware";
 
 const app: Express = express();
+
+const packageJson = JSON.parse(
+  readFileSync(new URL("../../package.json", import.meta.url), "utf-8"),
+);
+const appVersion: string = packageJson.version;
 
 // Trust the proxy in front of the gateway to get the actual client IP for rate limiting; otherwise, Express may receive the proxys IP instead.
 app.set("trust proxy", 1);
@@ -40,8 +46,14 @@ app.use("/api", routes);
 
 app.use("/socket.io", authMiddleware, blockCheckMiddleware, socketProxy);
 
-app.get("/", (_, res) => {
-  res.json({ status: "gateway online" });
+app.get("/status", (_req, res) => {
+  res.status(200).json({
+    service: "slotflow-api-gateway",
+    status: "operational",
+    version: appVersion,
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+  });
 });
 
 app.use(errorHandler);
