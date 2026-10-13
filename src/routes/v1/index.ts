@@ -1,13 +1,12 @@
 import { Router } from "express";
 import { proxy } from "../../proxy/proxy";
 import { serviceConfig } from "../../config/env";
-import type { Router as ExpressRouter } from "express";
 import { engagedSlots } from "../../slotChecker/engagedSlots";
 import { authMiddleware } from "../../middleware/auth.middleware";
 import { authRateLimit } from "../../middleware/rateLimit.middleware";
 import { blockCheckMiddleware } from "../../middleware/blockCheck.middleware";
 
-const router: ExpressRouter = Router();
+const router = Router();
 
 router.use(
   "/auth",
